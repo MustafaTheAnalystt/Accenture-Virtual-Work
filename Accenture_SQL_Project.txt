@@ -1,0 +1,107 @@
+SELECT DATABASE();
+
+USE accenture;
+
+SHOW TABLES;
+
+SELECT * FROM content;
+
+SELECT * FROM reactiontypes;
+
+SELECT * from reactions;
+
+LOAD DATA LOCAL INFILE "C:/Users/mjnon/Downloads/Reactions.csv" INTO TABLE reactions FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES ;
+
+SELECT * FROM reactions;
+
+
+SELECT * from reactions WHERE `User ID` = '' OR Type = '';
+
+DELETE FROM reactions where `User ID` = '';
+
+SET SQL_SAFE_UPDATES = 0; -- REMOVING SAFE CHECK FOR DELETING/UPDATING LARGE AMOUNTS OF DATA AT ONCE.
+
+DELETE FROM reactions where Type = '';
+
+SELECT * FROM reactions where `Content ID` = '';
+
+SELECT * FROM reactions where Datetime is NULL;
+
+ALTER TABLE reactions DROP Column MyUnknownColumn;
+ALTER TABLE reactions DROP Column `User ID`;
+
+
+
+SELECT * from Reactiontypes;
+ALTER TABLE Reactiontypes DROP Column MyUnknownColumn;
+
+
+SELECT * from content;
+ALTER TABLE content DROP Column MyUnknownColumn;
+ALTER TABLE content DROP Column URL;
+ALTER TABLE content DROP Column `User ID`;
+SELECT category from content Where category Like '%"%' ;
+Alter table content Rename Column Type TO Content_Type;
+
+ UPDATE content 
+SET category = CASE
+WHEN category Like '"%' Then Substr(category,2) 
+ELSE category
+END ;
+
+
+SELECT  
+CASE 
+WHEN category Like '%"""' Then REPLACE(category,'"""','')
+ELSE category
+END FROM content;
+
+
+UPDATE content 
+SET category = CASE
+WHEN category Like '%"""' Then REPLACE(category,'"""','') 
+ELSE category
+END ;
+
+
+SELECT category From content WHERE category like '%"%';
+
+
+-- Cleaing is done, Lets get our relevant data to make dashboards.
+
+-- joining tables.
+
+SELECT * FROM content
+Inner JOIN reactions
+  ON content.`Content ID` = reactions.`Content ID`;
+  
+  -- occurance 
+  
+  SELECT Distinct(category), Count(category) As 'Count of Occurance' From content 
+ Inner JOIN reactions
+  ON content.`Content ID` = reactions.`Content ID`
+  Group By category
+  Order BY 2 Desc
+  Limit 5;
+
+  
+Select * from content;
+Select * from reactions;
+Select * from reactiontypes;
+
+SELECT * FROM content as c
+Inner JOIN reactions
+  ON c.`Content ID` = reactions.`Content ID`
+  INNER JOIN reactiontypes as RT
+  ON RT.Type = reactions.Type;
+  
+  Select Distinct(category), Sum(Score) FROM content as c
+Inner JOIN reactions
+  ON c.`Content ID` = reactions.`Content ID`
+  INNER JOIN reactiontypes as RT
+  ON RT.Type = reactions.Type 
+  Group by category
+  Order BY 2 desc
+LIMIT 5;
