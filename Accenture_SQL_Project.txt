@@ -1,3 +1,34 @@
+/* Project Description : 
+
+This is a executed by Muhammd Mustafa Jamil, The dataset is taken from an online source and consists of COVID19 data values (COV vaccinations and COV deaths) from all around the world
+
+I was given the data of a company named Social Buzz , Social Buzz is a fast-growing technology unicorn that need to adapt quickly to its global scale. Social Buzz wants to list its company from private to public (IPO refers to when company wants to list on the stock market) and hence needs insights from the data to maximize its success.
+ 
+The problem statement of Social Buzz was to uncover their insights and data their big data because this social media website has 100,000 posts a day which are difficult to track on. 
+
+Project primarily focuses on these 3 tasks:
+
+1. An audit of Social Buss’s big data practice
+2. Recommendations for a successful IPO
+3. Analysis to find Social Buzz's top 5 most popular categories of content
+
+This project uses Intermediate/Advanced SQL queries to clean/explore the data for further visualisations.
+
+>>CRUD Command
+>>Local Infile Commands To Insert Heavy Data Sets
+>>Joins 
+>>Order By / Where Clause
+>>Crud Commands
+>> SUM / MAX 
+
+-->> NOTE: Please remove the limit for the rows to display for simplicity. You can toggle the LIMIT clause added by MySQL Workbench via the SQL Editor tab within the application preferences (Edit menu -> Preferences...).
+Simply un-check the "Limit Rows" option within the Query Results section
+
+*/
+
+-- Project Starts here
+
+
 SELECT DATABASE();
 
 USE accenture;
